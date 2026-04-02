@@ -1,0 +1,46 @@
+openapi: 3.0.0
+info:
+  title: Finance Data Processing API
+  version: 1.0.0
+  description: API for managing financial records and users with role-based access control.
+servers:
+  - url: http://localhost:3000/api
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []
+paths:
+  /auth/login:
+    post:
+      summary: User Login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "200":
+          description: Successful login
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+  /dashboard/summary:
+    get:
+      summary: Get Financial Summary
+      responses:
+        "200":
+          description: Return summary object
